@@ -62,7 +62,7 @@ async def dice_game(message: types.Message):
 
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(mem, commands=['mem'])
-    dp.register_message_handler(emoji)
     dp.register_message_handler(quiz_1, commands=["quiz"])
     dp.register_message_handler(start, commands=["start", 'info'])
-    dp.register_message_handler(dice_game,commands=['dice'])
+    dp.register_message_handler(dice_game, commands=['dice'])
+    dp.register_message_handler(emoji)
