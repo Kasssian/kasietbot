@@ -1,6 +1,6 @@
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from setting import bot, admins
+from config import bot, admins
 import random
 
 

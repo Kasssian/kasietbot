@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from setting import bot
+from config import bot
 
 
 async def zak(message: types.Message):
