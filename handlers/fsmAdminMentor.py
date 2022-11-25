@@ -8,6 +8,7 @@ from database.db import sql_command_insert
 
 
 class FSMAdmin(StatesGroup):
+    id = State()
     name = State()
     direction = State()
     age = State()
@@ -17,21 +18,21 @@ class FSMAdmin(StatesGroup):
 
 async def fsm_start(message: types.Message):
     if message.chat.type == 'private' and message.from_user.id in admins:
-        await FSMAdmin.name.set()
-        await message.answer("Введите ID ментора",
-                             reply_markup=cancel_markup)
+        await FSMAdmin.id.set()
+        await FSMAdmin.next()
+
+
     else:
         await message.answer("Пиши в личку!")
-
-
 
 
 async def load_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['id'] = message.from_user.id
-        data['name'] = message.text
+    await message.answer("имя")
+    data['name'] = message.text
     await FSMAdmin.next()
-    await message.answer("Какая группа?", reply_markup=cancel_markup)
+    await message.answer("направление?", reply_markup=cancel_markup)
 
 
 async def load_direction(message: types.Message, state: FSMContext):
@@ -46,6 +47,7 @@ async def load_age(message: types.Message, state: FSMContext):
         async with state.proxy() as data:
             data['age'] = int(message.text)
         await FSMAdmin.next()
+        await message.answer("какая группа?")
     except:
         await message.answer("Пиши нормально!")
 

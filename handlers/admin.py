@@ -4,7 +4,7 @@ from config import bot
 
 async def zak(message: types.Message):
     if not message.reply_to_message:
-        await message.answer('Отправь как ответ, чурка')
+        await message.answer('Отправь как ответ')
     else:
         await bot.pin_chat_message(message.chat.id, message.message_id)
 
