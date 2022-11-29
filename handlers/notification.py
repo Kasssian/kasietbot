@@ -15,7 +15,7 @@ async def go_to_patty():
 
 
 async def scheduler():
-    aioschedule.every().sunday.at('11:00').do(go_to_patty())
+    aioschedule.every().sunday.at('11:00').do(go_to_patty)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(2)

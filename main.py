@@ -11,10 +11,10 @@ async def on_startup(_):
     sql_create()
 
 notification.register_handlers_notification(dp)
+fsmAdminMentor.register_handlers_fsm_mentor(dp)
 client.register_handlers_client(dp)
 admin.register_handlers_admin(dp)
 callback.register_handlers_callback(dp)
-fsmAdminMentor.register_handlers_fsm_mentor(dp)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

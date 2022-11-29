@@ -19,42 +19,44 @@ class FSMAdmin(StatesGroup):
 async def fsm_start(message: types.Message):
     if message.chat.type == 'private' and message.from_user.id in admins:
         await FSMAdmin.id.set()
-        await FSMAdmin.next()
+        await message.answer('id')
 
 
     else:
         await message.answer("Пиши в личку!")
 
 
+async def load_id(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['id'] = int(message.text)
+    await FSMAdmin.next()
+    await message.answer("name?")
+
+
 async def load_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['id'] = message.from_user.id
-    await message.answer("имя")
-    data['name'] = message.text
+        data['name'] = message.text
     await FSMAdmin.next()
-    await message.answer("направление?", reply_markup=cancel_markup)
+    await message.answer("НАПРАВЛЕНИЕ?")
 
 
 async def load_direction(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['direction'] = message.text
     await FSMAdmin.next()
-    await message.answer("Сколько лет ментору?")
+    await message.answer("возраст?")
 
 
 async def load_age(message: types.Message, state: FSMContext):
-    try:
-        async with state.proxy() as data:
-            data['age'] = int(message.text)
-        await FSMAdmin.next()
-        await message.answer("какая группа?")
-    except:
-        await message.answer("Пиши нормально!")
+    async with state.proxy() as data:
+        data['age'] = message.text
+    await FSMAdmin.next()
+    await message.answer("групаа?")
 
 
 async def load_group(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['group'] = message.text
+        data['group_'] = message.text
     await FSMAdmin.next()
     await message.answer("Все правильно?", reply_markup=submit_markup)
 
@@ -82,6 +84,7 @@ async def cancel_reg(message: types.Message, state: FSMContext):
 def register_handlers_fsm_mentor(dp: Dispatcher):
     dp.register_message_handler(fsm_start, commands=['reg'])
     dp.register_message_handler(load_name, state=FSMAdmin.name)
+    dp.register_message_handler(load_id, state=FSMAdmin.id)
     dp.register_message_handler(load_direction, state=FSMAdmin.direction)
     dp.register_message_handler(load_age, state=FSMAdmin.age)
     dp.register_message_handler(load_group, state=FSMAdmin.group)
