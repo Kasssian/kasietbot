@@ -5,7 +5,7 @@ from config import bot
 # @dp.callback_query_handler(text="button_call_1")
 async def quiz_2(call: types.CallbackQuery):
     markup = InlineKeyboardMarkup()
-    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_1')
+    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_2')
     markup.add(button_call_2)
 
     question = "Сколько месяцев в году имеет 28 дней?"
@@ -32,7 +32,7 @@ async def quiz_2(call: types.CallbackQuery):
 # @dp.callback_query_handler(text="button_call_2")
 async def quiz_3(call: types.CallbackQuery):
     markup = InlineKeyboardMarkup()
-    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_2')
+    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_3')
     markup.add(button_call_2)
 
     question = "Сколько Римских империй было за всё время?"
