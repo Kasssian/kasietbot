@@ -5,7 +5,7 @@ from config import bot
 # @dp.callback_query_handler(text="button_call_1")
 async def quiz_2(call: types.CallbackQuery):
     markup = InlineKeyboardMarkup()
-    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_2')
+    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_1')
     markup.add(button_call_2)
 
     question = "Сколько месяцев в году имеет 28 дней?"
@@ -32,7 +32,7 @@ async def quiz_2(call: types.CallbackQuery):
 # @dp.callback_query_handler(text="button_call_2")
 async def quiz_3(call: types.CallbackQuery):
     markup = InlineKeyboardMarkup()
-    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_3')
+    button_call_2 = InlineKeyboardButton("NEXT", callback_data='button_call_2')
     markup.add(button_call_2)
 
     question = "Сколько Римских империй было за всё время?"
@@ -57,5 +57,5 @@ async def quiz_3(call: types.CallbackQuery):
 
 
 def register_handlers_callback(dp: Dispatcher):
-    dp.register_callback_query_handler(quiz_2, lambda call: call.data == "button_call_2")
-    dp.register_callback_query_handler(quiz_3, lambda call: call.data == "button_call_3")
+    dp.register_callback_query_handler(quiz_2, lambda call: call.data == "button_call_1")
+    dp.register_callback_query_handler(quiz_3, lambda call: call.data == "button_call_2")

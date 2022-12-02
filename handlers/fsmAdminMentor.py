@@ -30,28 +30,28 @@ async def load_id(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['id'] = int(message.text)
     await FSMAdmin.next()
-    await message.answer("name?")
+    await message.answer("Имя?")
 
 
 async def load_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['name'] = message.text
     await FSMAdmin.next()
-    await message.answer("НАПРАВЛЕНИЕ?")
+    await message.answer("Направление?")
 
 
 async def load_direction(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['direction'] = message.text
     await FSMAdmin.next()
-    await message.answer("возраст?")
+    await message.answer("Возраст ментора?")
 
 
 async def load_age(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['age'] = message.text
     await FSMAdmin.next()
-    await message.answer("групаа?")
+    await message.answer("Какая группа?")
 
 
 async def load_group(message: types.Message, state: FSMContext):
@@ -66,10 +66,10 @@ async def submit(message: types.Message, state: FSMContext):
         # Запись в БД
         await sql_command_insert(state)
         await state.finish()
-        await message.answer("Все свободен!")
+        await message.answer("Запись окончена")
     elif message.text.lower() == "нет":
         await state.finish()
-        await message.answer("Отмена")
+        await message.answer("Отмена записи")
     else:
         await message.answer("Повторите")
 

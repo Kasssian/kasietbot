@@ -13,7 +13,7 @@ submit_markup = ReplyKeyboardMarkup(
     resize_keyboard=True,
     one_time_keyboard=True
 ).add(
-    KeyboardButton("ДА"),
-    KeyboardButton("НЕТ"),
+    KeyboardButton("Да"),
+    KeyboardButton("Нет"),
 )
 
